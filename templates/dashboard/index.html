@@ -1,12 +1,74 @@
 {% extends 'partials/base.html' %}
 </br>
 {% block title %}
-<title>INDEX</title>
+INDEX
 {% endblock %}
 
 {% block content %}
-
-    <h1>INDEX</h1>
-
+</br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="border border-primary shadow mt-2">
+                <div class="card-header">Your tasks:</div>
+                <div class="card-body">
+                    <div class="row">
+                        <h5> 1 | Some task </h5>
+                        <div class="col-md-3 mt-1">
+                            <span class="btn btn-outline-success btn-sm">Completed</span>
+                            <!-- <span class="btn btn-outline-warning btn-sm">Undone</span> -->
+                        </div>
+                        <div class="col-md-3 mt-1">
+                            <a class="btn btn-info btn-sm" href="">Edit</a>
+                            <a class="btn btn-info btn-sm" href="">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card shadow mt-2">
+                <div class="card-header">Your tasks:</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h6>All tasks:</h6>
+                                    <p class="text-center">10</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h6>Completed:</h6>
+                                    <p class="text-center">5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h6>Undone:</h6>
+                                    <p class="text-center">5</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mt-2">
+                <div class="card-header">Add a new one:</div>
+                <div class="card-body">
+                    <form action="">
+                        <label for="">Name of the task:</label>
+                        <input class="form-control" type="text" name="name" placeholder="Add new task here...">
+                        <input class="btn btn-info mt-2" type="submit" value="Add"></input>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
