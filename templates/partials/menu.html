@@ -27,8 +27,8 @@
             <a class="nav-link disabled">Created by Krzysztof Grzywaczyk</a>
           </li>
         </ul>
-        <form class="d-flex mt-2">
-          <input class="form-control me-2" type="search" placeholder="Add a new task" aria-label="Search">
+        <form class="d-flex mt-2" action="/add" method="POST">
+          <input class="form-control me-2" type ="text" name="name" placeholder="Add a new task">
           <button class="btn btn-outline-success" type="submit">ADD</button>
         </form>
       </div>
