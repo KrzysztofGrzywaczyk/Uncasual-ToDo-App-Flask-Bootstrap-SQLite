@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+
+<center>
+<form name='myForm' method="post" action="{{ url_for('signup') }}" style='text-align: center;'>
+  <p>Email</p>
+  <input type="email" name="email" placeholder='Enter you email adress' required oninvalid="setCustomValidity('Please enter a valid email ')" onchange="try{setCustomValidity('')}catch(e){}"></input>
+  <p>Username</p>
+  <input type="text" name="user" placeholder='Enter your username' required></input>
+  <p>Password</p>
+  <input type="password" name="password" placeholder='Enter your password' required></input>
+  <br><br>
+  <input type="submit" value="Signup"></input>
+   <a href="{{ url_for('home') }}" class='button_link'>Cancel</a>
+</form>
+</center>
+
+</body>
+{% endblock %}

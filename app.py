@@ -10,7 +10,7 @@ and also Bootstrap for stylistic purposes.
 """
 
 
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -37,6 +37,11 @@ def add():
     new_task = Task(name = name)
     db.session.add(new_task)
     db.session.commit()
+
+    if request.method == 'POST':
+        name = request.form.get("name")
+        flash(f'Succesfully created task: {name}', 'success')
+
     return redirect(url_for('index'))
 
 
@@ -45,14 +50,22 @@ def archive(id):
     task = Task.query.filter_by(id=id).first()
     task.active = not task.active
     db.session.commit()
+    if task.active:
+        flash(f'Succesfully restored: {task.name}', 'secondary')
+    else:
+        flash(f'Succesfully archived: {task.name}', 'secondary')
     return redirect(url_for('index'))
 
 
 @app.route('/delete/<id>')
 def delete(id : bool):
     task = Task.query.filter_by(id=id).first()
+    if task:
+        name = task.name
+        flash(f'Succesfully deleted task: {name}', 'warning')
     db.session.delete(task)
     db.session.commit()
+
     return redirect(url_for('index'))
 
 
@@ -79,4 +92,6 @@ def about():
 
 
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
+
     app.run(debug=True)
