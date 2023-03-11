@@ -1,8 +1,7 @@
 # About this web app:
 
-Uncasual, **Web ToDo-type aplication,** where user is able to:
+Uncasual, **Web Task-managment-type aplication,** where user is able to:
 
-Web ToDo-type aplication, where user is able to:
 - Add a new task
 - Edit name, description and status of the task
 - Mark task as completed and reverse this process
