@@ -1,12 +1,13 @@
 """
 Web ToDo-type aplication, where user is able to:
 - Add a new task
-- Mark task as completed and reverse this process.
-- Archive Completed tasks to another section and restores them
-- Delete tasks completely
+- Edit name, description and status of the task
+- Mark task as completed and reverse this process
+- Archive Completed tasks to another section and restores them to the main one
+- Delete tasks completely from both section-levels
 
 Created using flask micro-freamwork and SQLAlchemy to connect to SQLite database
-and also Bootstrap for stylistic purposes.
+and also Bootstrap for stylistic purposes and flash comunicates.
 """
 
 
@@ -27,21 +28,15 @@ class Task(db.Model):
     active = db.Column(db.Boolean, default=True)
 
 
-with app.app_context():
-    db.create_all()
-
-
 @app.route('/add', methods=['POST'])
 def add():
     name = request.form.get('name')
+    if not name:
+        name = "Unnamed"
     new_task = Task(name = name)
     db.session.add(new_task)
     db.session.commit()
-
-    if request.method == 'POST':
-        name = request.form.get("name")
-        flash(f'Succesfully created task: {name}', 'success')
-
+    flash(f'Succesfully created task: {name}', 'success')
     return redirect(url_for('index'))
 
 
@@ -49,12 +44,29 @@ def add():
 def archive(id):
     task = Task.query.filter_by(id=id).first()
     task.active = not task.active
-    db.session.commit()
     if task.active:
         flash(f'Succesfully restored: {task.name}', 'secondary')
+        if task.name.endswith('(archived)'):
+            task.name = task.name.rsplit(' ', 1)[0]
     else:
         flash(f'Succesfully archived: {task.name}', 'secondary')
+        task.name += ' (archived)'
+    db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route('/edit/<id>', methods=['GET','POST'])
+def edit(id):
+    task = Task.query.filter_by(id=id).first()
+    if request.method == 'GET':
+        return render_template('dashboard/edit.html', task=task)
+    if request.method == 'POST':
+        task.name = request.form.get('name')
+        task.description = request.form.get('description')
+        task.done = True if request.form.get('done')=='on' else False
+        db.session.commit()
+        flash(f'Succesfully modified task: {task.name}', 'success')
+        return redirect(url_for('index'))
 
 
 @app.route('/delete/<id>')
@@ -73,6 +85,8 @@ def delete(id : bool):
 def complete(id : bool):
     task = Task.query.filter_by(id=id).first()
     task.complete = not task.complete
+    if task.complete:
+        flash('Completed !!!', 'success')
     db.session.commit()
     return redirect(url_for('index'))
 
@@ -93,5 +107,4 @@ def about():
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
-
     app.run(debug=True)

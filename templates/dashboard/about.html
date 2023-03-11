@@ -1,13 +1,13 @@
 {% extends 'partials/base.html' %}
-</br>
+
 {% block title %}
 About
 {% endblock %}
 
 {% block content %}
 <div class="container">
-<div class="row">
-    <div class="col-md-9 mt-2">
+<div class="row mt-4">
+    <div class="col-md-9">
         <dev class="card shaow mt-2">
             <div class="card-header">
                 <h3>About this website:</h3>
@@ -16,12 +16,13 @@ About
                 <p>
                     Web ToDo-type aplication, where user is able to:</br>
                     - Add a new task</br>
-                    - Mark task as completed and reverse this process.</br>
-                    - Archive Completed tasks to another section and restores them</br>
-                    - Delete tasks completely</br>
-                    </br>
+                    - Edit name, description and status of the task</br>
+                    - Mark task as completed and reverse this process</br>
+                    - Archive Completed tasks to another section and restores them to the main one</br>
+                    - Delete tasks completely from both section-levels</br>
+                </br>
                     Created using flask micro-freamwork and SQLAlchemy to connect to SQLite database</br>
-                    and also Bootstrap for stylistic purposes.</br>
+                    and also Bootstrap for stylistic purposes and flash comunicates.</br>
                 </p>
             </div>
         </dev>

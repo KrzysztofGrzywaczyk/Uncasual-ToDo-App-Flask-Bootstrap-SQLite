@@ -1,7 +1,7 @@
 {% extends 'partials/base.html' %}
-</br>
+
 {% block title %}
-TODO APPP
+Task Manage Alication
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@ TODO APPP
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="border border_left rounded shadow mt-2">
+            <div class="border border_left rounded shadow">
                 <div class="card-header">Your tasks:</div>
             </div>
             <div class="border_left shadow">
@@ -22,7 +22,7 @@ TODO APPP
                         </div>
                         {% if task.description %}
                         <div class="row">
-                            <p> {task.description}</p>
+                            <p> {{task.description}}</p>
                         </div>
                         {% endif %}
                         <div class="row">
@@ -32,12 +32,13 @@ TODO APPP
                             </div>
                             {% else %}
                             <div class="col-md-4">
-                                <span class="btn btn-outline-warning btn-sm">Undone</span>
+                                <span class="btn btn-outline-warning btn-sm">Not completed</span>
                             </div>
                             {% endif %}
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-5">
                                 <a class="btn btn-secondary btn-sm" href="/delete/{{task.id}}">Delete</a>
+                                <a class="btn btn-light btn-sm" href="/edit/{{task.id}}">Edit</a>
                                 {% if task.complete == False %}
                                 <a class="btn btn-info btn-sm" href="/complete/{{task.id}}">Complete</a>
                                 {% else %}
@@ -54,7 +55,7 @@ TODO APPP
 
         </div>
         <div class="col-md-5">
-            <div class="card shadow mt-2">
+            <div class="card shadow">
                 <div class="card-header">Your tasks:</div>
                 <div class="card-body">
                     <div class="row">
